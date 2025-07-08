@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Datos\" />
+    <Folder Include="Mapeos\" />
+    <Folder Include="Extenciones\" />
+    <Folder Include="Repositorio\" />
+  </ItemGroup>
+
 </Project>

@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dto\" />
-    <Folder Include="Entidades\" />
-    <Folder Include="EntidadesPersonalizadas\" />
-    <Folder Include="Interface\" />
     <Folder Include="Servicios\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Utilitarios\Utilitarios\Utilitarios.csproj" />
   </ItemGroup>
 
 </Project>
