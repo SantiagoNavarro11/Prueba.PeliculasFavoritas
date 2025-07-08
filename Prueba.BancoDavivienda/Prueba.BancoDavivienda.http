@@ -1,0 +1,6 @@
+@Prueba.BancoDavivienda_HostAddress = http://localhost:5080
+
+GET {{Prueba.BancoDavivienda_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
