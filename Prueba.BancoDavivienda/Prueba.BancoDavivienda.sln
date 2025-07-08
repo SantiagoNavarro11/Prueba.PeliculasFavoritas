@@ -1,13 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36212.18 d17.14
+VisualStudioVersion = 17.14.36212.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prueba.BancoDavivienda", "Prueba.BancoDavivienda.csproj", "{9AD1A2A9-8FB8-465D-AA5B-84083102BEDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilitarios", "..\Utilitarios\Utilitarios\Utilitarios.csproj", "{05A94981-98FF-B0FD-32A0-141004B3CF27}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.1 Utilitarios", "0.1 Utilitarios", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.2 PeliculasFavoritas", "0.2 PeliculasFavoritas", "{EE87CE2E-EADC-49E7-A564-F7E9D08626BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.1 Core", "0.1 Core", "{9A72F098-0E58-447D-A26C-B9E4525D004F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.PeliculasFavoritas", "..\Core.PeliculasFavoritas\Core.PeliculasFavoritas.csproj", "{87109B81-759A-4DFB-A0E2-581625582A01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.2 Infraestructura", "0.2 Infraestructura", "{2DB7F78A-27C4-4478-9D6B-C06832D2DBA7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.3 Api", "0.3 Api", "{330818E0-4BAE-4706-A716-6E7487D6B8D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfraestructuraPeliculasFavoritas", "..\InfraesrtucturaPeliculasFavoritas\InfraestructuraPeliculasFavoritas.csproj", "{5A611D38-B602-486A-ADF5-764BC2A403D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +35,26 @@ Global
 		{05A94981-98FF-B0FD-32A0-141004B3CF27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05A94981-98FF-B0FD-32A0-141004B3CF27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05A94981-98FF-B0FD-32A0-141004B3CF27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87109B81-759A-4DFB-A0E2-581625582A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87109B81-759A-4DFB-A0E2-581625582A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87109B81-759A-4DFB-A0E2-581625582A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87109B81-759A-4DFB-A0E2-581625582A01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A611D38-B602-486A-ADF5-764BC2A403D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A611D38-B602-486A-ADF5-764BC2A403D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A611D38-B602-486A-ADF5-764BC2A403D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A611D38-B602-486A-ADF5-764BC2A403D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{9AD1A2A9-8FB8-465D-AA5B-84083102BEDC} = {330818E0-4BAE-4706-A716-6E7487D6B8D1}
 		{05A94981-98FF-B0FD-32A0-141004B3CF27} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{9A72F098-0E58-447D-A26C-B9E4525D004F} = {EE87CE2E-EADC-49E7-A564-F7E9D08626BB}
+		{87109B81-759A-4DFB-A0E2-581625582A01} = {9A72F098-0E58-447D-A26C-B9E4525D004F}
+		{2DB7F78A-27C4-4478-9D6B-C06832D2DBA7} = {EE87CE2E-EADC-49E7-A564-F7E9D08626BB}
+		{330818E0-4BAE-4706-A716-6E7487D6B8D1} = {EE87CE2E-EADC-49E7-A564-F7E9D08626BB}
+		{5A611D38-B602-486A-ADF5-764BC2A403D2} = {2DB7F78A-27C4-4478-9D6B-C06832D2DBA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F48A2566-5AF0-47EF-A0BD-9B2667482B77}
