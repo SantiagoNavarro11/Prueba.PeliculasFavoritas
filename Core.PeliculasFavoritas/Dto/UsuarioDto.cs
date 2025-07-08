@@ -19,12 +19,7 @@
         /// <value>
         /// Correo electrónico del usuario.
         /// </value>
-        public required string Correo { get; set; }
-
-        /// <value>
-        /// Contraseña del usuario (preferiblemente almacenada de forma segura).
-        /// </value>
-        public required string Contrasena { get; set; }
+        public required string Correo { get; set; }        
 
         /// <value>
         /// Fecha en la que el usuario fue registrado en el sistema.

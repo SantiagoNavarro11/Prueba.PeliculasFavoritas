@@ -1,28 +1,27 @@
-﻿using Utilitarios.Entidades;
-
-namespace Core.PeliculasFavoritas.Entidades
+﻿namespace Core.PeliculasFavoritas.Entidades
 {
+    using Utilitarios.Entidades;
     public class PeliculasFavoritas : EntidadBase
     {
         /// <value>
         /// Identificador único de la película favorita.
         /// </value>
-        public required int Id { get; set; }
+        public int Id { get; set; }
 
         /// <value>
         /// Identificador del usuario que agregó esta película como favorita.
         /// </value>
-        public required int UsuarioId { get; set; }
+        public int UsuarioId { get; set; }
 
         /// <value>
         /// Usuario al que pertenece esta película favorita.
         /// </value>
-        public required Usuario Usuario { get; set; }
+        public Usuario Usuario { get; set; }
 
         /// <value>
         /// Identificador único en IMDb proporcionado por la API externa.
         /// </value>
-        public required string ImdbID { get; set; }
+        public string ImdbID { get; set; }
 
         /// <value>
         /// Título completo de la película.
@@ -88,5 +87,6 @@ namespace Core.PeliculasFavoritas.Entidades
         /// Fecha en la que el usuario agregó esta película como favorita.
         /// </value>
         public DateTime FechaAgregada { get; set; }
+
     }
 }

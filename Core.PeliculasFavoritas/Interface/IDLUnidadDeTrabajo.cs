@@ -7,7 +7,7 @@
     /// Define las operaciones para la unidad de trabajo (IServicioUnidadDeTrabajo) en el contexto de peliculas favoritas.
     /// La unidad de trabajo gestiona las instancias de repositorios relacionados con las entidades de la base de datos.
     /// </summary>
-    public interface IDLUnidadDeTrabajo
+    public interface IDLUnidadDeTrabajo : IDisposable
     {
 
         #region Instancias

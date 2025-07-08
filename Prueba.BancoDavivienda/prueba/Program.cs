@@ -1,29 +1,28 @@
-ï»¿using Api.PaginaWeb.Middlewares;
+using Api.PaginaWeb.Middlewares;
 using Microsoft.Extensions.Logging.ApplicationInsights;
 using Microsoft.OpenApi.Models;
-using InfraestructuraPeliculasFavoritas.Extenciones;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Definir la polÃ­tica de CORS
+// Definir la política de CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins", policy =>
     {
         policy.AllowAnyOrigin()  // Permite cualquier origen
-              .AllowAnyMethod()  // Permite cualquier mÃ©todo (GET, POST, etc.)
+              .AllowAnyMethod()  // Permite cualquier método (GET, POST, etc.)
               .AllowAnyHeader(); // Permite cualquier encabezado
     });
 });
 builder.Services.AddScoped<GloblalExceptionHandlingMiddleware>();
-builder.Services.AddAuthorization(); // âœ… Agregado
+builder.Services.AddAuthorization(); // ? Agregado
 builder.Services.AddControllers();
 // Automapper - registro de mapeos.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-// ConfiguraciÃ³n Swagger.
+// Configuración Swagger.
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -33,7 +32,7 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1"
     });
 
-    // ConfiguraciÃ³n para usar un Bearer Token
+    // Configuración para usar un Bearer Token
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -67,7 +66,7 @@ builder.Services.AddSwaggerGen(c =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle.
 builder.Services.AddEndpointsApiExplorer();
 
-// ConfiguraciÃ³n Singleton.
+// Configuración Singleton.
 builder.Services.AddSingleton(builder.Configuration);
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -75,28 +74,28 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Logging.AddApplicationInsights(
     configureTelemetryConfiguration: (config) =>
-        config.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"], 
+        config.ConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"], // ? corregido
     configureApplicationInsightsLoggerOptions: (options) => { }
 );
 
 // Configurar filtros de logging
 builder.Logging.AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Information);
 
-// InyecciÃ³n de dependencias.
+// Inyección de dependencias.
 builder.Services.InyeccionDependencias();
 
-// ConfiguraciÃ³n del Contexto.
+// Configuración del Contexto.
 builder.Services.AgregarContextoBD(builder.Configuration);
 
 // Agregar HttpClient para solicitudes internas.
 builder.Services.AddHttpClient();
 
-// app => Define una clase que proporciona los mecanismos para configurar la solicitud de una aplicaciÃ³n.
+// app => Define una clase que proporciona los mecanismos para configurar la solicitud de una aplicación.
 var app = builder.Build();
 
 // Configurar la zona horaria predeterminada a Colombia (SA Pacific Standard Time)
 var colombiaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
-TimeZoneInfo.ClearCachedData(); // Limpia la cachÃ© de zonas horarias, opcional
+TimeZoneInfo.ClearCachedData(); // Limpia la caché de zonas horarias, opcional
 app.Services.GetService<IServiceProvider>().GetService<ILogger<Program>>()
     ?.LogInformation($"Zona horaria configurada: {colombiaTimeZone.DisplayName}");
 
@@ -106,16 +105,16 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-// ConfiguraciÃ³n de los Cors.
+// Configuración de los Cors.
 app.UseCors("AllowAllOrigins");
 
-// ConfiguraciÃ³n Swagger.
+// Configuración Swagger.
 app.UseSwagger();
 
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pagina Web API v1");
-    c.RoutePrefix = "swagger"; // Cambiado aquÃ­
+    c.RoutePrefix = "swagger"; // Cambiado aquí
 });
 
 app.UseHttpsRedirection();

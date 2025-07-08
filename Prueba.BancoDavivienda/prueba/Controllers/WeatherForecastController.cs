@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MicroservicioPeliculasFavoritas.Controllers
+namespace prueba.Controllers
 {
     [ApiController]
     [Route("[controller]")]
