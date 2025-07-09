@@ -105,7 +105,6 @@
             if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contrasena))
                 return Task.FromResult<(UsuarioDto?, string)>((null, "El correo y la contraseña son obligatorios."));
 
-            // Resto del código debe ser async si vas a usar await
             return ValidarCredencialesInterno(correo, contrasena);
         }
         /// <summary>

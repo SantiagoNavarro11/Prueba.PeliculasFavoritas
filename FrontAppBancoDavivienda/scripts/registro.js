@@ -35,8 +35,8 @@ if (registroForm) {
           window.location.href = "../index.html";
         }, 2000);
       } else {
-        const error = await response.text();
-        alertaError(error);
+        const error = await response.json(); // <-- aquí procesas como JSON
+        alertaError(error.mensaje || "Ocurrió un error.");
       }
     } catch (error) {
       console.error(error);
