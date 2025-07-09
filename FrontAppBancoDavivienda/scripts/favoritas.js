@@ -189,7 +189,7 @@ formEditar.addEventListener("submit", async (e) => {
     imdbID,
     fechaAgregada: new Date().toISOString(),
   };
-
+  debugger;
   try {
     const response = await fetch(ENDPOINTS.actualizarPelicula, {
       method: "PUT",
@@ -213,8 +213,7 @@ formEditar.addEventListener("submit", async (e) => {
 // Cancela la edición y oculta el formulario
 function cancelarEdicion() {
   document.getElementById("formEditarPelicula").reset();
-  document.getElem;
-  entById("formularioEditar").classList.add("hidden");
+  document.getElementById("formularioEditar").classList.add("hidden");
 }
 // Abre el formulario de edición con los datos de la película
 function abrirFormularioEdicion(pelicula) {
@@ -237,5 +236,6 @@ function abrirFormularioEdicion(pelicula) {
   document.getElementById("editarImdbID").value = pelicula.imdbID || "";
 }
 // Agrega el evento al poster de la tarjeta para abrir el formulario de edición
+const card = document.createElement("div");
 const poster = card.querySelector("img");
 poster.addEventListener("click", () => abrirFormularioEdicion(peli));
