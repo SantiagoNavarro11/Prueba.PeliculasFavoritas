@@ -11,6 +11,7 @@
     {
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {
+            #region Map
             // Nombre de la tabla
             builder.ToTable("Usuarios");
 
@@ -34,6 +35,7 @@
             builder.Property(u => u.FechaRegistro)
                 .IsRequired()
                 .HasColumnType("datetime");
+            #endregion
         }
     }
 }

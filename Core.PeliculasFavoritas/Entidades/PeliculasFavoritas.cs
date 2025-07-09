@@ -3,6 +3,7 @@
     using Utilitarios.Entidades;
     public class PeliculasFavoritas : EntidadBase
     {
+        #region Propiedades
         /// <value>
         /// Identificador único de la película favorita.
         /// </value>
@@ -87,6 +88,6 @@
         /// Fecha en la que el usuario agregó esta película como favorita.
         /// </value>
         public DateTime FechaAgregada { get; set; }
-
+        #endregion
     }
 }

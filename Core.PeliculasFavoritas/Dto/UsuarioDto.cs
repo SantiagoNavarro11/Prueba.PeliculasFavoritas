@@ -1,11 +1,11 @@
 ﻿namespace Core.PeliculasFavoritas.Dto
 {
-    using Core.PeliculasFavoritas.Entidades;
     /// <summary>
     /// Objeto de transferencia de datos para crear un Usuario.
     /// </summary>
     public class UsuarioDto
     {
+        #region Propiedades
         /// <value>
         /// Identificador único del usuario.
         /// </value>
@@ -14,12 +14,12 @@
         /// <value>
         /// Nombre completo del usuario.
         /// </value>
-        public required string? Nombre { get; set; }
+        public string? Nombre { get; set; }
 
         /// <value>
         /// Correo electrónico del usuario.
         /// </value>
-        public required string Correo { get; set; }        
+        public string? Correo { get; set; }        
 
         /// <value>
         /// Fecha en la que el usuario fue registrado en el sistema.
@@ -27,8 +27,9 @@
         public DateTime FechaRegistro { get; set; }
 
         /// <value>
-        /// Lista de películas favoritas asociadas al usuario.
+        /// Contraseña del usuario (preferiblemente almacenada de forma segura).
         /// </value>
-        public List<PeliculasFavoritas>? PeliculasFavoritas { get; set; }
+        public string? Contrasena { get; set; }
+        #endregion
     }
 }

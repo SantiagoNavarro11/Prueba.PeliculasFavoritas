@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.PeliculasFavoritas.EntidadesPersonalizadas
+﻿namespace Core.PeliculasFavoritas.EntidadesPersonalizadas
 {
     /// <summary>
-    /// Objeto de transferencia de datos para recibir parámetros de filtrado y búsqueda
-    /// al consultar las películas favoritas de un usuario.
+    /// Parametros de busqueda para las peliculas favoritas.
     /// </summary>
     public class ParametrosPeliculasFavoritas
     {
+        #region Parametros
         /// <value>
         /// Año de estreno de la película.
         /// </value>
@@ -25,9 +19,6 @@ namespace Core.PeliculasFavoritas.EntidadesPersonalizadas
         /// Género principal o categoría de la película.
         /// </value>
         public string? Genero { get; set; }
-
-        /// <value>
-        /// URL del póster oficial de la película.
-        /// </value>
+        #endregion
     }
 }

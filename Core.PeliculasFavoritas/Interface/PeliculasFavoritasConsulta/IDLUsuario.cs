@@ -24,20 +24,20 @@
         /// <summary>
         /// Registra un nuevo usuario en el sistema.
         /// </summary>
-        /// <param name="dto">DTO con la información del nuevo usuario.</param>
+        /// <param name="usuario">usuario con la información del nuevo usuario.</param>
         /// <returns>
         /// Identificador único del usuario insertado.
         /// </returns>
-        Task<int> InsertarUsuario(UsuarioDto dto);
+        Task<int> InsertarUsuario(Usuario usuario);
         /// <summary>
         /// Actualiza los datos de un usuario existente.
         /// </summary>
         /// <param name="id">Identificador del usuario a actualizar.</param>
-        /// <param name="dto">DTO con los nuevos valores del usuario.</param>
+        /// <param name="usuario">DTO con los nuevos valores del usuario.</param>
         /// <returns>
         /// Valor booleano que indica si la actualización fue exitosa.
         /// </returns>
-        Task<bool> ActualizarUsuario(int id, UsuarioDto dto);
+        Task<bool> ActualizarUsuario(int id, Usuario usuario);
         /// <summary>
         /// Elimina un usuario del sistema.
         /// </summary>
@@ -63,6 +63,7 @@
         /// Objeto <see cref="UsuarioDto"/> si las credenciales son válidas, de lo contrario null.
         /// </returns>
         Task<UsuarioDto> ValidarCredenciales(string correo, string contrasena);
+
         #endregion
     }
 }

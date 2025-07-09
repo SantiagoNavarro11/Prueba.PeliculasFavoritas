@@ -22,8 +22,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Core.PeliculasFavoritas\Core.PeliculasFavoritas.csproj" />
-		<ProjectReference Include="..\Utilitarios\Utilitarios\Utilitarios.csproj" />
 		<ProjectReference Include="..\InfraestructuraPeliculasFavoritas\InfraestructuraPeliculasFavoritas.csproj" />
 	</ItemGroup>
 

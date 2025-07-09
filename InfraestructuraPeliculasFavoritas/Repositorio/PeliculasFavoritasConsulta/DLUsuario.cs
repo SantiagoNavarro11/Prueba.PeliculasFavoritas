@@ -15,6 +15,9 @@
     using Utilitarios.ConfiguracionRepositorio;
     using Utilitarios.Interfaces.ConfiguracionRepositorio;
 
+    /// <summary>
+    /// Repositorio de acceso a datos para las operaciones relacionadas con los usuarios.
+    /// </summary>
     public class DLUsuario : CrudSqlRepositorio<PeliculasFavoritas>, IDLUsuario
     {
         #region Variables
@@ -34,50 +37,6 @@
             contextDB = context;
         }
 
-        public void Actualizar(Usuario objActualizar)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task ActualizarAsync(Usuario objActualizar)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> ActualizarUsuario(int id, UsuarioDto dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Adicionar(Usuario objAdicionar)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task AdicionarMasivo(List<Usuario> lstAdicionar)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Usuario>> ConsultarLista(Expression<Func<Usuario, bool>> objBusqueda)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Usuario> ConsultarObjeto(Expression<Func<Usuario, bool>> objBusqueda)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Usuario> ConsultarTodosFiltroQuery(Expression<Func<Usuario, bool>> objBusqueda)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UsuarioDto> ConsultarUsuarioPorId(int id)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
 
         #region Consulta Personalizada
@@ -100,13 +59,106 @@
             Id  = u.Id,
             Nombre = u.Nombre,
             Correo = u.Correo,
-            FechaRegistro = u.FechaRegistro,         
+            FechaRegistro = u.FechaRegistro,   
+            Contrasena = u.Contrasena,
         })
           .AsNoTracking()
           .ToListAsync();
             return registro;
         }
+        /// <summary>
+        /// Actualiza los datos de un usuario existente en la base de datos.
+        /// </summary>
+        /// <param name="id">Identificador del usuario a actualizar.</param>
+        /// <param name="usuario">Objeto con los datos actualizados del usuario.</param>
+        /// <returns>True si el usuario fue actualizado correctamente; false si no se encontró el usuario.</returns>
+        public async Task<bool> ActualizarUsuario(int id, Usuario usuario)
+        {
+            var existente = await contextDB.Usuario.FindAsync(id);
+            if (existente == null)
+                return false;
 
+            // Actualiza campos necesarios
+            existente.Nombre = usuario.Nombre;
+            existente.Correo = usuario.Correo;
+            existente.Contrasena = usuario.Contrasena;
+            existente.FechaRegistro = usuario.FechaRegistro;
+
+            contextDB.Usuario.Update(existente);
+            await contextDB.SaveChangesAsync();
+            return true;
+        }
+        /// <summary>
+        /// Consulta un usuario por correo electrónico para validar credenciales de inicio de sesión.
+        /// </summary>
+        /// <param name="correo">Correo electrónico del usuario.</param>
+        /// <param name="contrasena">Contraseña del usuario (sin encriptar).</param>
+        /// <returns>DTO con los datos del usuario si existe; null si no se encuentra.</returns>
+        public async Task<UsuarioDto?> ValidarCredenciales(string correo, string contrasena)
+
+        {
+            return await contextDB.Usuario
+                .Where(u => u.Correo == correo)
+                .Select(u => new UsuarioDto
+                {
+                    Id = u.Id,
+                    Nombre = u.Nombre,
+                    Correo = u.Correo,
+                    FechaRegistro = u.FechaRegistro,
+                    Contrasena = u.Contrasena
+                })
+                .FirstOrDefaultAsync();
+        }
+        /// <summary>
+        /// Elimina un usuario de la base de datos a partir de su identificador.
+        /// </summary>
+        /// <param name="id">Identificador del usuario a eliminar.</param>
+        /// <returns>True si el usuario fue eliminado correctamente; false si no se encontró.</returns>
+        public async Task<bool> EliminarUsuario(int id)
+        {
+            var usuario = await contextDB.Usuario.FindAsync(id);
+            if (usuario == null)
+                return false;
+
+            contextDB.Usuario.Remove(usuario);
+            await contextDB.SaveChangesAsync();
+            return true;
+        }
+        /// <summary>
+        /// Inserta un nuevo usuario en la base de datos.
+        /// </summary>
+        /// <param name="usuario">Entidad con los datos del usuario a registrar.</param>
+        /// <returns>Identificador del usuario insertado.</returns>
+        public async Task<int> InsertarUsuario(Usuario usuario)
+        {
+            await contextDB.Usuario.AddAsync(usuario);
+            await contextDB.SaveChangesAsync();
+            return usuario.Id; // Asegúrate que 'Id' es la clave primaria
+        }
+        /// <summary>
+        /// Consulta los datos de un usuario específico por su identificador.
+        /// </summary>
+        /// <param name="id">Identificador del usuario a consultar.</param>
+        /// <returns>DTO con los datos del usuario si se encuentra; null si no existe.</returns>
+
+        public async Task<UsuarioDto> ConsultarUsuarioPorId(int id)
+        {
+            var usuario = await contextDB.Usuario
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (usuario == null)
+                return null;
+
+            return new UsuarioDto
+            {
+                Id = usuario.Id,
+                Nombre = usuario.Nombre,
+                Correo = usuario.Correo,
+                Contrasena = usuario.Contrasena,
+                FechaRegistro = usuario.FechaRegistro
+            };
+        }
         public void Eliminar(Usuario objEliminar)
         {
             throw new NotImplementedException();
@@ -122,7 +174,12 @@
             throw new NotImplementedException();
         }
 
-        public Task<bool> EliminarUsuario(int id)
+        public void Actualizar(Usuario objActualizar)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ActualizarAsync(Usuario objActualizar)
         {
             throw new NotImplementedException();
         }
@@ -132,10 +189,7 @@
             throw new NotImplementedException();
         }
 
-        public Task<UsuarioDto> ValidarCredenciales(string correo, string contrasena)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         Task<Usuario> ICrudSqlRepositorio<Usuario>.ConsultarPorId(byte id)
         {
@@ -143,11 +197,6 @@
         }
 
         Task<Usuario> ICrudSqlRepositorio<Usuario>.ConsultarPorId(short id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Usuario> ICrudSqlRepositorio<Usuario>.ConsultarPorId(int id)
         {
             throw new NotImplementedException();
         }
@@ -163,6 +212,36 @@
         }
 
         IEnumerable<Usuario> ICrudSqlRepositorio<Usuario>.ConsultarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Usuario> ICrudSqlRepositorio<Usuario>.ConsultarPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Usuario> ConsultarObjeto(Expression<Func<Usuario, bool>> objBusqueda)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Usuario> ConsultarTodosFiltroQuery(Expression<Func<Usuario, bool>> objBusqueda)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Usuario>> ConsultarLista(Expression<Func<Usuario, bool>> objBusqueda)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Adicionar(Usuario objAdicionar)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AdicionarMasivo(List<Usuario> lstAdicionar)
         {
             throw new NotImplementedException();
         }

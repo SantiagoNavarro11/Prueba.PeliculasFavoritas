@@ -6,7 +6,10 @@
     {
         #region Instancias	
         /// <summary>Inicialización y verificación de la instancia para el servicio PeliculasFavoritasServicio.</summary>
-        public IDLPeliculasFavoritasServicio PeliculasFavoritasServicio { get; }
+        public IPeliculasFavoritasServicio PeliculasFavoritasServicio { get; }
+
+        /// <summary>Inicialización y verificación de la instancia para el servicio .</summary>
+        public IUsuarioServicio UsuarioServicio { get; }
         #endregion
     }
 }

@@ -3,11 +3,10 @@
     using AutoMapper;
     using Core.PeliculasFavoritas.Interface;
     using Core.PeliculasFavoritas.Interface.PeliculasFavoritasConsulta;
-    using Core.SistemaPos.Servicios;
 
     /// <summary>
-    /// Implementación de la unidad de trabajo para los servicios de la página web.
-    /// Se encarga de inicializar y proporcionar acceso a los diferentes servicios del sistema POS.
+    /// Implementación de la unidad de trabajo para los servicios del sistema de películas favoritas.
+    /// Se encarga de inicializar y proporcionar acceso centralizado a los diferentes servicios del sistema.
     /// </summary>
     public partial class ServicioUnidadDeTrabajo : IServicioUnidadDeTrabajo
     {
@@ -24,10 +23,16 @@
         private readonly IMapper _iMapper;
 
         /// <summary>
-        /// Instancia del servicio del sistema POS que gestiona la lógica de negocio relacionada con POS.
+        /// Instancia del servicio que gestiona la lógica de negocio relacionada con las películas favoritas.
         /// Su inicialización es controlada para garantizar una única instancia durante el ciclo de vida.
         /// </summary>
-        private readonly IDLPeliculasFavoritasServicio _iPeliculasFavoritasServicio;
+        private readonly IPeliculasFavoritasServicio _iPeliculasFavoritasServicio;
+
+        /// <summary>
+        /// Instancia del servicio que gestiona la lógica de negocio relacionada con los usuarios del sistema.
+        /// Su inicialización es controlada para garantizar una única instancia durante el ciclo de vida.
+        /// </summary>
+        private readonly IUsuarioServicio _iUsuarioServicio;
 
         #endregion
 
@@ -53,11 +58,16 @@
         #region Instancias
 
         /// <summary>
-        /// Obtiene una instancia del servicio <see cref="ISistemaPosService"/>.
+        /// Obtiene una instancia del servicio <see cref="_iPeliculasFavoritasServicio"/>.
         /// Si no existe una instancia previa, se crea una nueva utilizando la unidad de trabajo de datos actual.
         /// </summary>
-        public IDLPeliculasFavoritasServicio PeliculasFavoritasServicio => _iPeliculasFavoritasServicio ?? new PeliculasFavoritasServicio(_iDLUnidadDeTrabajo);
+        public IPeliculasFavoritasServicio PeliculasFavoritasServicio => _iPeliculasFavoritasServicio ?? new PeliculasFavoritasServicio(_iDLUnidadDeTrabajo);
 
+
+        /// <summary>
+        /// Obtiene una instancia del servicio <see cref="_iUsuarioServicio"/>.
+        /// Si no existe una instancia previa, se crea una nueva utilizando la unidad de trabajo de datos actual.
+        public IUsuarioServicio UsuarioServicio => _iUsuarioServicio ?? new UsuarioServicios(_iDLUnidadDeTrabajo);
         #endregion
     }
 }

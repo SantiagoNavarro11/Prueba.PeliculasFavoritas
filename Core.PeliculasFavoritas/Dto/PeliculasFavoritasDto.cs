@@ -1,11 +1,11 @@
 ﻿namespace Core.PeliculasFavoritas.Dto
 {
-    using Core.PeliculasFavoritas.Entidades;
     /// <summary>
     /// Objeto de transferencia de datos para crear una nueva película favorita.
     /// </summary>
     public class PeliculasFavoritasDto
     {
+        #region Propiedades
         /// <value>
         /// Identificador único de la película favorita.
         /// </value>
@@ -15,11 +15,6 @@
         /// Identificador del usuario que agregó esta película como favorita.
         /// </value>
         public int UsuarioId { get; set; }
-
-        /// <value>
-        /// Usuario al que pertenece esta película favorita.
-        /// </value>
-        public Usuario Usuario { get; set; }
 
         /// <value>
         /// Identificador único en IMDb proporcionado por la API externa.
@@ -90,5 +85,6 @@
         /// Fecha en la que el usuario agregó esta película como favorita.
         /// </value>
         public DateTime FechaAgregada { get; set; }
+        #endregion
     }
 }

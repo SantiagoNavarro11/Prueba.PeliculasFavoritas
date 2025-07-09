@@ -21,7 +21,7 @@ public static class ServiceCollectionExtension
     {
         // Configuración del Contexto.
         services.AddDbContext<PeliculasFavoritasContext>(options =>
-        options.UseSqlServer(configuration.GetConnectionString("CarteleraPeliculas"))); // Crear la propiedad para la cadena de conexión de cada conexión contexto.
+        options.UseSqlServer(configuration.GetConnectionString("CarteleraPeliculas"))); 
    
     }
 
@@ -41,4 +41,4 @@ public static class ServiceCollectionExtension
     }
 
     #endregion
-    }
+}

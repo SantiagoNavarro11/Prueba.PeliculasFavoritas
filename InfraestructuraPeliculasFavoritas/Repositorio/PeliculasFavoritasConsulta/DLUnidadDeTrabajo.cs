@@ -8,8 +8,8 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Implementación de la unidad de trabajo (Unit of Work) para el acceso a datos
-    /// en el sistema POS. Gestiona la instanciación y acceso a los repositorios de entidades,
+    /// Implementación de la unidad de trabajo (Unit of Work) para el acceso a datos.
+    /// Gestiona la instanciación y acceso a los repositorios de entidades,
     /// así como la persistencia y liberación de recursos de la base de datos.
     /// </summary>
     public class DLUnidadDeTrabajo : IDLUnidadDeTrabajo
@@ -17,7 +17,7 @@
         #region Variables
 
         /// <summary>
-        /// Contexto de base de datos del sistema POS utilizado para acceder a las entidades.
+        /// Contexto de base de datos del CarleraPeliculas utilizado para acceder a las entidades.
         /// </summary>
         private readonly PeliculasFavoritasContext _conexionBD;
 

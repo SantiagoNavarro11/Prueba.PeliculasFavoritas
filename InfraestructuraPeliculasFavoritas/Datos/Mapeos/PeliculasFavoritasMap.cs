@@ -11,6 +11,7 @@
     {
         public void Configure(EntityTypeBuilder<PeliculasFavoritas> builder)
         {
+            #region Map
             builder.ToTable("PeliculasFavoritas");
 
             builder.HasKey(p => p.Id)
@@ -68,6 +69,12 @@
             builder.Property(p => p.FechaAgregada)
                    .IsRequired()
                    .HasColumnType("datetime");
+
+            builder.HasOne(p => p.Usuario)
+                   .WithMany(u => u.PeliculasFavoritas) // 👈 Aquí le dices cuál es la propiedad de navegación en Usuario
+                   .HasForeignKey(p => p.UsuarioId)
+                   .OnDelete(DeleteBehavior.Cascade);
+            #endregion
         }
     }
 }
