@@ -52,6 +52,7 @@
             var registro = await contextDB.PeliculasFavoritas
                 .Include(p => p.Usuario)
                 .Where(p =>
+                    (objBusqueda.UsuarioId == null || p.UsuarioId == objBusqueda.UsuarioId) &&
                     (string.IsNullOrEmpty(objBusqueda.Genero) || p.Genero.Contains(objBusqueda.Genero)) &&
                     (objBusqueda.Anio == null || p.Anio == objBusqueda.Anio) &&
                     (string.IsNullOrEmpty(objBusqueda.Director) || p.Director.Contains(objBusqueda.Director))
@@ -133,9 +134,34 @@
         /// </summary>
         /// <param name="id">Identificador de la película.</param>
         /// <returns>Un objeto <see cref="PeliculasFavoritasDto"/> si se implementa.</returns>
-        public Task<PeliculasFavoritasDto> ConsultarPeliculaPorId(int id)
+        public async Task<PeliculasFavoritasDto> ConsultarPeliculaPorId(int id)
         {
-            throw new NotImplementedException();
+              var p = await contextDB.PeliculasFavoritas
+             .AsNoTracking()
+             .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (p == null)
+                return null;
+
+            return new PeliculasFavoritasDto
+            {
+                Id = p.Id,
+                UsuarioId = p.UsuarioId,
+                ImdbID = p.ImdbID,
+                Titulo = p.Titulo,
+                Anio = p.Anio,
+                Director = p.Director,
+                Genero = p.Genero,
+                PosterUrl = p.PosterUrl,
+                Sinopsis = p.Sinopsis,
+                CalificacionIMDB = p.CalificacionIMDB,
+                Duracion = p.Duracion,
+                Idioma = p.Idioma,
+                Pais = p.Pais,
+                Actores = p.Actores,
+                Premios = p.Premios,
+                FechaAgregada = p.FechaAgregada
+            };
         }
 
         /// <summary>
@@ -153,6 +179,12 @@
             await contextDB.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<bool> ExistePeliculaFavorita(int usuarioId, string imdbID)
+        {
+            return await contextDB.PeliculasFavoritas
+                .AnyAsync(p => p.UsuarioId == usuarioId && p.ImdbID == imdbID);
         }
 
         #endregion

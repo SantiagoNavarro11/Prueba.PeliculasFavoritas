@@ -19,7 +19,7 @@
         /// <value>
         /// Identificador único en IMDb proporcionado por la API externa.
         /// </value>
-        public string ImdbID { get; set; }
+        public string? ImdbID { get; set; }
 
         /// <value>
         /// Título completo de la película.
@@ -54,7 +54,7 @@
         /// <value>
         /// Calificación promedio de la película según IMDb.
         /// </value>
-        public decimal? CalificacionIMDB { get; set; }
+        public string? CalificacionIMDB { get; set; }
 
         /// <value>
         /// Duración total de la película (por ejemplo: "136 min").

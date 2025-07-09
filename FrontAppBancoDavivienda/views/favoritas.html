@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Películas Favoritas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header -->
+    <header
+      class="bg-green-800 text-white p-4 flex justify-between items-center"
+    >
+      <h1 class="text-xl font-bold">Películas Favoritas</h1>
+      <nav class="flex gap-6 items-center">
+        <a href="favoritas.html" class="hover:underline font-medium"
+          >Favoritas</a
+        >
+        <a href="catalogo.html" class="hover:underline font-medium">Explorar</a>
+        <button
+          onclick="cerrarSesion()"
+          class="bg-red-600 px-4 py-2 rounded hover:bg-red-700"
+        >
+          Cerrar sesión
+        </button>
+      </nav>
+    </header>
+    <!-- Formulario de edición -->
+    <section
+      id="formularioEditar"
+      class="max-w-4xl mx-auto p-6 bg-white rounded shadow hidden"
+    >
+      <h2 class="text-2xl font-semibold mb-4">Editar película</h2>
+      <form
+        id="formEditarPelicula"
+        class="grid grid-cols-1 md:grid-cols-2 gap-4"
+      >
+        <input type="hidden" id="editarId" />
+        <input
+          type="text"
+          id="editarImdbID"
+          placeholder="IMDB ID"
+          class="p-2 border rounded"
+          readonly
+        />
+        <input
+          type="text"
+          id="editarTitulo"
+          placeholder="Título"
+          class="p-2 border rounded"
+          required
+        />
+        <input
+          type="number"
+          id="editarAnio"
+          placeholder="Año"
+          class="p-2 border rounded"
+          required
+        />
+        <input
+          type="text"
+          id="editarDirector"
+          placeholder="Director"
+          class="p-2 border rounded"
+          required
+        />
+        <input
+          type="text"
+          id="editarGenero"
+          placeholder="Género"
+          class="p-2 border rounded"
+          required
+        />
+        <input
+          type="text"
+          id="editarIdioma"
+          placeholder="Idioma"
+          class="p-2 border rounded"
+        />
+        <input
+          type="text"
+          id="editarPais"
+          placeholder="País"
+          class="p-2 border rounded"
+        />
+        <input
+          type="text"
+          id="editarDuracion"
+          placeholder="Duración"
+          class="p-2 border rounded"
+        />
+        <input
+          type="text"
+          id="editarCalificacion"
+          placeholder="Calificación IMDB"
+          class="p-2 border rounded"
+        />
+        <input
+          type="text"
+          id="editarPremios"
+          placeholder="Premios"
+          class="p-2 border rounded"
+        />
+        <input
+          type="text"
+          id="editarActores"
+          placeholder="Actores"
+          class="p-2 border rounded"
+        />
+        <input
+          type="text"
+          id="editarPosterUrl"
+          placeholder="Poster URL"
+          class="p-2 border rounded"
+        />
+        <textarea
+          id="editarSinopsis"
+          placeholder="Sinopsis"
+          class="p-2 border rounded col-span-1 md:col-span-2"
+          rows="3"
+        ></textarea>
+
+        <div class="col-span-2 flex justify-between mt-4">
+          <button
+            type="submit"
+            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            Actualizar
+          </button>
+          <button
+            type="button"
+            onclick="cancelarEdicion()"
+            class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </section>
+    <!-- Catálogo -->
+    <main class="max-w-6xl mx-auto p-6">
+      <h2 class="text-2xl font-semibold mb-6 text-center text-gray-800">
+        Tus películas favoritas
+      </h2>
+
+      <section
+        id="listaPeliculas"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      ></section>
+    </main>
+
+    <script src="../scripts/constantes.js"></script>
+    <script src="../scripts/favoritas.js"></script>
+    <script src="../scripts/alertbox.js"></script>
+    <script src="../scripts/alertas.js"></script>
+  </body>
+</html>

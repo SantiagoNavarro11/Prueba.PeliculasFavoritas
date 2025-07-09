@@ -59,6 +59,8 @@
         /// </returns>
         Task<PeliculasFavoritasDto> ConsultarPeliculaPorId(int id);
 
+        Task<bool> ExistePeliculaFavorita(int usuarioId, string imdbID);
+
         #endregion
     }
 }

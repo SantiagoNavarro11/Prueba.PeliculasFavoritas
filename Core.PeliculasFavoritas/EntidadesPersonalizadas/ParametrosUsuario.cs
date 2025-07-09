@@ -8,6 +8,10 @@
     {
         #region Parametros
         /// <value>
+        /// Identificador del usuario que agregó esta película como favorita.
+        /// </value>
+        public int UsuarioId { get; set; }
+        /// <value>
         /// Correo electrónico del usuario.
         /// </value>
         public string? Correo { get; set; }

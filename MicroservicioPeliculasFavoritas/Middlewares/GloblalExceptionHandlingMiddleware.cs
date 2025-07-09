@@ -38,7 +38,7 @@
                 await context.Response.WriteAsync(json);
             }
             catch (Exception e)
-            {
+                {
                 _logger.LogError(e, e.Message);
 
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

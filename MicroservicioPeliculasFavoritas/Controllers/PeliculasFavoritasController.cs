@@ -76,9 +76,17 @@
         [Route("CrearPeliculaFavorita")]
         public async Task<IActionResult> CrearPeliculaFavorita([FromBody] PeliculasFavoritasDto peliculaNueva)
         {
-            PeliculasFavoritas entidad = _iMapper.Map<PeliculasFavoritas>(peliculaNueva);
-            await _iServicioUnidadDeTrabajo.PeliculasFavoritasServicio.InsertarPelicula(entidad);
-            return Ok("Película registrada exitosamente.");
+            try
+            {
+                PeliculasFavoritas entidad = _iMapper.Map<PeliculasFavoritas>(peliculaNueva);
+                await _iServicioUnidadDeTrabajo.PeliculasFavoritasServicio.InsertarPelicula(entidad);
+                return Ok("Película registrada exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                // Puedes loguearlo si usas un sistema de logging
+                return StatusCode(500, $"Error al registrar la película: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -90,9 +98,16 @@
         [Route("ActualizarPeliculaFavorita")]
         public async Task<IActionResult> ActualizarPeliculaFavorita([FromBody] PeliculasFavoritasDto peliculaActualizada)
         {
-            var entidad = _iMapper.Map<PeliculasFavoritas>(peliculaActualizada);
-            await _iServicioUnidadDeTrabajo.PeliculasFavoritasServicio.ActualizarPelicula(entidad);
-            return Ok("Película actualizada exitosamente.");
+            try
+            {
+                var entidad = _iMapper.Map<PeliculasFavoritas>(peliculaActualizada);
+                await _iServicioUnidadDeTrabajo.PeliculasFavoritasServicio.ActualizarPelicula(entidad);
+                return Ok("Película actualizada exitosamente.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al actualizar la película: {ex.Message}");
+            }
         }
 
         /// <summary>

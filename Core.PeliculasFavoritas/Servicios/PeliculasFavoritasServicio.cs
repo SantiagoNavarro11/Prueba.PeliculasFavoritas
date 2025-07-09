@@ -67,20 +67,16 @@
             if (string.IsNullOrWhiteSpace(pelicula?.Titulo))
                 errores += "El título de la película es obligatorio. | ";
 
-            // Validación: IMDb ID obligatorio
-            if (string.IsNullOrWhiteSpace(pelicula?.ImdbID))
-                errores += "El ID de IMDb es obligatorio. | ";
-
             // Validación: Fecha agregada (asignar si es default)
             if (pelicula != null && pelicula.FechaAgregada == default)
                 pelicula.FechaAgregada = DateTime.UtcNow;
 
-            // Validación: Verificar existencia del usuario
-            if (pelicula != null && pelicula.UsuarioId > 0)
+            // Validación de duplicado por UsuarioId + ImdbID
+            if (pelicula != null && !string.IsNullOrWhiteSpace(pelicula.ImdbID))
             {
-                var usuarioExiste = await _iDLUnidadDeTrabajo.DLUsuario.ConsultarPorId(pelicula.UsuarioId);
-                if (usuarioExiste == null)
-                    errores += $"No se encontró ningún usuario con el ID {pelicula.UsuarioId}. | ";
+                var yaExiste = await _iDLUnidadDeTrabajo.DLPeliculasFavoritas.ExistePeliculaFavorita(pelicula.UsuarioId, pelicula.ImdbID);
+                if (yaExiste)
+                    errores += $"Ya has agregado esta película anteriormente (ImdbID: {pelicula.ImdbID}). | ";
             }
 
             // Lanzar errores si existen
@@ -118,18 +114,7 @@
             // Validación: Título obligatorio
             if (string.IsNullOrWhiteSpace(pelicula?.Titulo))
                 errores += "El título de la película es obligatorio. | ";
-
-            // Validación: IMDb ID obligatorio
-            if (string.IsNullOrWhiteSpace(pelicula?.ImdbID))
-                errores += "El ID de IMDb es obligatorio. | ";
-
-            // Validación: Verificar existencia del usuario
-            if (pelicula != null && pelicula.UsuarioId > 0)
-            {
-                var usuarioExiste = await _iDLUnidadDeTrabajo.DLUsuario.ConsultarPorId(pelicula.UsuarioId);
-                if (usuarioExiste == null)
-                    errores += $"No se encontró ningún usuario con el ID {pelicula.UsuarioId}. | ";
-            }
+            
 
             // Lanzar errores si existen
             if (!string.IsNullOrWhiteSpace(errores))

@@ -57,7 +57,7 @@
         /// <value>
         /// Calificación promedio de la película según IMDb.
         /// </value>
-        public decimal? CalificacionIMDB { get; set; }
+        public string? CalificacionIMDB { get; set; }
 
         /// <value>
         /// Duración total de la película (por ejemplo: "136 min").

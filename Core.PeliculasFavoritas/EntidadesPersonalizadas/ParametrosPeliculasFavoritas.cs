@@ -7,6 +7,10 @@
     {
         #region Parametros
         /// <value>
+        /// Identificador del usuario que agregó esta película como favorita.
+        /// </value>
+        public int UsuarioId { get; set; }
+        /// <value>
         /// Año de estreno de la película.
         /// </value>
         public int? Anio { get; set; }

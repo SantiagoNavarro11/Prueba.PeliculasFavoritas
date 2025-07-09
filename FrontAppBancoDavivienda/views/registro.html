@@ -1,0 +1,75 @@
+<!-- registro.html -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Usuario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <h1 class="text-2xl font-bold mb-6 text-center">Crear cuenta nueva</h1>
+
+      <form id="registroForm" class="space-y-4">
+        <div>
+          <label for="nombre" class="block font-medium mb-1"
+            >Nombre completo</label
+          >
+          <input
+            type="text"
+            id="nombre"
+            placeholder="Ej. David Santiago Navarro"
+            class="w-full p-2 border rounded"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="correo" class="block font-medium mb-1"
+            >Correo electrónico</label
+          >
+          <input
+            type="email"
+            id="correo"
+            placeholder="Ej. davidnavarro038@gmail.com"
+            class="w-full p-2 border rounded"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="contrasena" class="block font-medium mb-1"
+            >Contraseña</label
+          >
+          <input
+            type="password"
+            id="contrasena"
+            placeholder="******"
+            class="w-full p-2 border rounded"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700"
+        >
+          Registrarse
+        </button>
+      </form>
+
+      <p class="mt-4 text-center">
+        ¿Ya tienes cuenta?
+        <a href="../index.html" class="text-blue-600 hover:underline"
+          >Inicia sesión aquí</a
+        >
+      </p>
+    </div>
+
+    <script src="../scripts/constantes.js"></script>
+    <script src="../scripts/registro.js"></script>
+    <script src="../scripts/alertbox.js"></script>
+    <script src="../scripts/alertas.js"></script>
+  </body>
+</html>
