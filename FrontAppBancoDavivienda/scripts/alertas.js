@@ -1,3 +1,4 @@
+// Funcion de confrimación
 function alertaConfirmacion(mensaje) {
   alertbox.render({
     alertIcon: "success",
@@ -8,7 +9,7 @@ function alertaConfirmacion(mensaje) {
     btnColor: "#4CAF50",
   });
 }
-
+// Funcion de error
 function alertaError(mensaje) {
   alertbox.render({
     alertIcon: "error",
@@ -19,7 +20,7 @@ function alertaError(mensaje) {
     btnColor: "#ff4c33",
   });
 }
-
+// Funcion de advertencia
 function alertaAdvertencia(mensaje) {
   alertbox.render({
     alertIcon: "warning",

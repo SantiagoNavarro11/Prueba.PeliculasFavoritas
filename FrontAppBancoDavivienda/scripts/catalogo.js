@@ -1,21 +1,17 @@
-// catalogo.js
-
 // Espera que todo el DOM esté cargado antes de ejecutar la lógica
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Verifica si hay un usuario logueado, si no, lo redirige al login
+  // Verifica si hay un usuario logueado, si no, lo redirige al login
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   if (!usuario) {
     window.location.href = "index.html";
     return;
   }
 
-  // 3. Manejo del formulario de agregar película
+  // Manejo del formulario de agregar película
   const form = document.getElementById("formPelicula");
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
-    debugger;
-    // 3.1 Obtener valores del formulario
+    // Obtener valores del formulario
     const titulo = document.getElementById("titulo").value.trim();
     const anio = document.getElementById("anio").value.trim();
     const director = document.getElementById("director").value.trim();
@@ -26,10 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 3.2 Consultar datos extras desde OMDb
+    //Consultar datos extras desde OMDb
     const omdbInfo = await obtenerDatosOMDb(titulo);
 
-    // 3.3 Armar el objeto para enviar al backend
+    //Armar el objeto para enviar al backend
     const nuevaPelicula = {
       usuarioId: usuario.id,
       titulo,
@@ -40,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       fechaAgregada: new Date().toISOString(),
     };
 
-    // 3.4 Enviar al backend
+    // Enviar al backend
     try {
       console.log("Pelicula que se enviará al backend:", nuevaPelicula);
 
@@ -64,8 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-// 4. Función para consultar y mostrar las películas registradas
+//  Función para consultar y mostrar las películas registradas
 async function cargarPeliculas() {
   const contenedor = document.getElementById("listaPeliculas");
   contenedor.innerHTML = "";
@@ -95,8 +90,7 @@ async function cargarPeliculas() {
     console.error("Error al cargar películas:", error);
   }
 }
-
-// 5. Función que consulta a OMDb para obtener el póster (por si el backend no lo tiene)
+// Función que consulta a OMDb para obtener el póster (por si el backend no lo tiene)
 async function buscarPoster(titulo) {
   try {
     const response = await fetch(ENDPOINTS.omdbApi(titulo));
@@ -114,8 +108,7 @@ async function buscarPoster(titulo) {
     return "https://placehold.co/300x450?text=Sin+Imagen";
   }
 }
-
-// 6. Elimina una película favorita
+// Elimina una película favorita
 async function eliminarPelicula(id) {
   if (!confirm("¿Estás seguro de eliminar esta película?")) return;
 
@@ -133,8 +126,7 @@ async function eliminarPelicula(id) {
     alert("Error al eliminar.");
   }
 }
-
-// 7. Consulta completa a OMDb (devuelve todos los datos posibles)
+// Consulta completa a OMDb (devuelve todos los datos posibles)
 async function obtenerDatosOMDb(titulo) {
   try {
     const response = await fetch(ENDPOINTS.omdbApi(titulo));
@@ -144,16 +136,13 @@ async function obtenerDatosOMDb(titulo) {
     return {}; // Si falla, devuelve objeto vacío
   }
 }
-
-// 8. Cierra la sesión del usuario
+// Cierra la sesión del usuario
 function cerrarSesion() {
   localStorage.removeItem("usuario");
   window.location.href = "../index.html";
 }
-
 const inputTitulo = document.getElementById("titulo");
 const listaSug = document.getElementById("sugerencias");
-
 // Evento de escritura
 inputTitulo.addEventListener("input", async () => {
   const query = inputTitulo.value.trim();
@@ -179,7 +168,7 @@ inputTitulo.addEventListener("input", async () => {
     console.error("Error en sugerencias:", err);
   }
 });
-
+// función para seleccionar una película de la lista de sugerencias
 async function seleccionarPelicula(imdbID) {
   listaSug.innerHTML = "";
 
@@ -198,7 +187,7 @@ async function seleccionarPelicula(imdbID) {
     console.error("Error al  cargar detalles:", err);
   }
 }
-
+// Buscar múltiples páginas de resultados de películas que coincidan con un título (usando la paginación que ofrece la API de OMDb).
 async function buscarPostersMultiples(titulo, maxPaginas = 3) {
   const resultados = [];
 
@@ -210,16 +199,15 @@ async function buscarPostersMultiples(titulo, maxPaginas = 3) {
       if (data.Response === "True") {
         resultados.push(...data.Search);
       } else {
-        break; // Si no hay más resultados, se sale del bucle
+        break;
       }
     } catch (err) {
       console.error("Error en página:", page, err);
     }
   }
-
   return resultados;
 }
-
+//Buscar varias páginas de películas por título, y mostrar las Carsds.
 async function mostrarSugerenciasMultiples(titulo) {
   const sugerencias = await buscarPostersMultiples(titulo, 3);
   const contenedor = document.getElementById("listaPeliculas");
@@ -240,30 +228,24 @@ async function mostrarSugerenciasMultiples(titulo) {
       <button class="mt-2 bg-green-600 text-white p-2 rounded hover:bg-green-700"
               onclick="guardarPeliculaOMDb('${peli.imdbID}')">Guardar</button>
     `;
-
     contenedor.appendChild(card);
   }
 }
-
+// Función para buscar películas desde el input de búsqueda
 function buscarDesdeInput() {
   const titulo = document.getElementById("inputBusqueda").value.trim();
   if (titulo) {
     mostrarSugerenciasMultiples(titulo);
   }
 }
-/**
- * Guarda una película consultada desde OMDb en el backend del usuario actual.
- * @param {string} imdbID - ID único de la película en OMDb.
- */
+// Función para guardar una película desde OMDb
 async function guardarPeliculaOMDb(imdbID) {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   if (!usuario) {
     alertaAdvertencia("Debes iniciar sesión para guardar películas.");
     return;
   }
-
   try {
-    // Consulta los detalles completos de la película desde OMDb
     const res = await fetch(ENDPOINTS.omdbDetalle(imdbID));
     const data = await res.json();
 
@@ -305,7 +287,7 @@ async function guardarPeliculaOMDb(imdbID) {
     alertaError("Error de red al intentar guardar la película.");
   }
 }
-
+//Limpia los campos de búsqueda y resultados
 function limpiarBusqueda() {
   const input = document.getElementById("inputBusqueda");
   input.value = "";

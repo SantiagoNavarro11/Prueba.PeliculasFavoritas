@@ -1,9 +1,8 @@
 const loginForm = document.getElementById("loginForm");
-
+// Verifica si el formulario de inicio de sesión existe antes de agregar el evento
 if (loginForm) {
   loginForm.addEventListener("submit", async function (e) {
     e.preventDefault();
-
     const correo = document.getElementById("usuario").value.trim();
     const contrasena = document.getElementById("contrasena").value.trim();
 
@@ -11,9 +10,8 @@ if (loginForm) {
       alertaAdvertencia("Por favor, complete todos los campos.");
       return;
     }
-
     const body = { correo, contrasena };
-
+    // Crea el cuerpo de la solicitud para el inicio de sesión
     try {
       const response = await fetch(ENDPOINTS.login, {
         method: "POST",
@@ -22,7 +20,7 @@ if (loginForm) {
         },
         body: JSON.stringify(body),
       });
-
+      // Verifica si la respuesta es exitosa
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("usuario", JSON.stringify(data));

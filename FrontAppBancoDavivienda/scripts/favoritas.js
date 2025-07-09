@@ -1,5 +1,3 @@
-// catalogo.js
-
 // Espera que todo el DOM esté cargado antes de ejecutar la lógica
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Verifica si hay un usuario logueado, si no, lo redirige al login
@@ -12,10 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 2. Carga la lista de películas al iniciar
   cargarPeliculas();
 });
-
-/**
- * 4. Función para consultar y mostrar las películas registradas desde el backend
- */
+// Función para consultar y mostrar las películas registradas desde el backend
 async function cargarPeliculas() {
   const contenedor = document.getElementById("listaPeliculas");
   contenedor.innerHTML = "";
@@ -71,10 +66,7 @@ async function cargarPeliculas() {
     alertaError("Ocurrió un error al cargar las películas.");
   }
 }
-
-/**
- * 5. Consulta a OMDb para obtener el póster (fallback si el backend no lo tiene)
- */
+// Consulta a OMDb para obtener el póster.
 async function buscarPoster(titulo) {
   try {
     const response = await fetch(ENDPOINTS.omdbApi(titulo));
@@ -92,10 +84,7 @@ async function buscarPoster(titulo) {
     return "https://placehold.co/300x450?text=Sin+Imagen";
   }
 }
-
-/**
- * 6. Elimina una película favorita
- */
+// Elimina una película favorita
 async function eliminarPelicula(id) {
   try {
     const response = await fetch(ENDPOINTS.eliminarPelicula(id), {
@@ -114,10 +103,7 @@ async function eliminarPelicula(id) {
     alertaError("Error de conexión al eliminar la película.");
   }
 }
-
-/**
- * 7. Consulta completa a OMDb con todos los datos posibles
- */
+// Consulta completa a OMDb con todos los datos posibles
 async function obtenerDatosOMDb(titulo) {
   try {
     const response = await fetch(ENDPOINTS.omdbApi(titulo));
@@ -127,26 +113,20 @@ async function obtenerDatosOMDb(titulo) {
     return {};
   }
 }
-
-/**
- * 8. Cierra la sesión del usuario
- */
+// Cierra la sesión del usuario
 function cerrarSesion() {
   localStorage.removeItem("usuario");
   window.location.href = "../index.html";
 }
-
-/**
- * Limpia el input y la lista mostrada (si estás usando búsqueda)
- */
+// Limpia el input
 function limpiarBusqueda() {
   const input = document.getElementById("inputBusqueda");
   input.value = "";
   document.getElementById("listaPeliculas").innerHTML = "";
 }
-
+// Maneja el envío del formulario de búsqueda
 const formEditar = document.getElementById("formEditarPelicula");
-
+// Maneja el envío del formulario de edición
 formEditar.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -230,14 +210,13 @@ formEditar.addEventListener("submit", async (e) => {
     alertaError("Error de conexión al actualizar la película.");
   }
 });
+// Cancela la edición y oculta el formulario
 function cancelarEdicion() {
   document.getElementById("formEditarPelicula").reset();
-  document.getElementById("formularioEditar").classList.add("hidden");
+  document.getElem;
+  entById("formularioEditar").classList.add("hidden");
 }
-function cancelarEdicion() {
-  document.getElementById("formEditarPelicula").reset();
-  document.getElementById("formularioEditar").classList.add("hidden");
-}
+// Abre el formulario de edición con los datos de la película
 function abrirFormularioEdicion(pelicula) {
   document.getElementById("formularioEditar").classList.remove("hidden");
 
@@ -257,5 +236,6 @@ function abrirFormularioEdicion(pelicula) {
   document.getElementById("editarSinopsis").value = pelicula.sinopsis || "";
   document.getElementById("editarImdbID").value = pelicula.imdbID || "";
 }
+// Agrega el evento al poster de la tarjeta para abrir el formulario de edición
 const poster = card.querySelector("img");
 poster.addEventListener("click", () => abrirFormularioEdicion(peli));

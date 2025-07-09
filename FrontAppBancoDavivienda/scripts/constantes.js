@@ -1,6 +1,6 @@
 const BASE_URL = "https://localhost:7056/api";
 const OMDB_API_KEY = "ca833e20";
-
+// Define los endpoints de la API
 const ENDPOINTS = {
   login: `${BASE_URL}/Usuario/Login`,
   registrarUsuario: `${BASE_URL}/Usuario/InsertarUsuario`,

@@ -1,5 +1,5 @@
 const registroForm = document.getElementById("registroForm");
-
+// Verifica si el formulario de registro existe antes de agregar el evento
 if (registroForm) {
   registroForm.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -12,7 +12,6 @@ if (registroForm) {
       alertaAdvertencia("Por favor, complete todos los campos.");
       return;
     }
-
     const body = {
       id: 0,
       nombre,
@@ -20,7 +19,7 @@ if (registroForm) {
       contrasena,
       fechaRegistro: new Date().toISOString(),
     };
-
+    // Verifica si el usuario ya existe
     try {
       const response = await fetch(ENDPOINTS.registrarUsuario, {
         method: "POST",
@@ -29,12 +28,12 @@ if (registroForm) {
         },
         body: JSON.stringify(body),
       });
-
+      // Verifica si la respuesta es exitosa
       if (response.ok) {
         alertaConfirmacion("Usuario registrado exitosamente.");
         setTimeout(() => {
           window.location.href = "../index.html";
-        }, 2000); // Da tiempo a ver la alerta antes de redirigir
+        }, 2000);
       } else {
         const error = await response.text();
         alertaError(error);
